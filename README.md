@@ -7,7 +7,7 @@ Aplicação web de um **mercado express** (hortifruti, limpeza, mercearia e vest
 
 | | |
 |---|---|
-| 🌐 **Deploy (produção)** | **LINK_DEPLOY** (Render) |
+| 🌐 **Deploy (produção)** | **https://mercado-express-security-er2t.onrender.com** (Render) |
 | 💻 **IDE utilizada** | IntelliJ IDEA |
 | 🗄️ **Banco de dados** | PostgreSQL (tabelas `TDS_Sec_MVC_TB_Mercado` e `TDS_Users_Mercado`) |
 | ☁️ **Plataforma de deploy** | Render (Web Service Docker + PostgreSQL) |
