@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Login')}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<main>
+    <div class="card auth">
+        <h2>🔐 Entrar</h2>
+        <div th:replace="~{fragments :: alertas}"></div>
+        <div th:if="${param.error}" class="alert erro">E-mail ou senha incorretos.</div>
+        <div th:if="${param.logout}" class="alert ok">Você saiu do sistema.</div>
+        <form th:action="@{/login}" method="post">
+            <label>E-mail <input type="email" name="email" placeholder="seu@email.com" required autofocus></label>
+            <label>Senha <input type="password" name="senha" placeholder="••••••" required></label>
+            <button type="submit">Entrar</button>
+        </form>
+        <p style="font-size:.9rem">Ainda não tem conta? <a th:href="@{/cadastro}">Cadastre-se</a></p>
+        <div class="alert info" style="font-size:.85rem;margin:0">
+            <b>Contas de demonstração</b><br>
+            ADMIN: admin@mercadoexpress.com / admin123<br>
+            CLIENTE: cliente@mercadoexpress.com / cliente123
+        </div>
+    </div>
+</main>
+</body>
+</html>

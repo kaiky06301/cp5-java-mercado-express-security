@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Acesso negado')}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<main>
+    <div class="card auth" style="text-align:center">
+        <h2>⛔ Acesso negado</h2>
+        <p>Seu perfil não tem permissão para acessar esta página. Somente o <b>ADMIN</b> pode cadastrar, editar e excluir produtos.</p>
+        <a class="btn" th:href="@{/produtos}">Voltar aos produtos</a>
+    </div>
+</main>
+</body>
+</html>

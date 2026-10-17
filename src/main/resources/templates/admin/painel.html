@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments :: head('Painel Admin')}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<main>
+    <h2>🛠️ Painel do Administrador</h2>
+    <p>Bem-vindo(a), <b sec:authentication="name"></b>. Área restrita ao perfil <span class="badge ADMIN">ADMIN</span>.</p>
+    <div class="kpis">
+        <div class="card kpi"><div class="label">Produtos</div><div class="valor" th:text="${totalProdutos}"></div></div>
+        <div class="card kpi"><div class="label">Itens em estoque</div><div class="valor" th:text="${totalEstoque}"></div></div>
+        <div class="card kpi"><div class="label">Estoque baixo</div><div class="valor" style="color:#dc2626" th:text="${estoqueBaixo}"></div></div>
+        <div class="card kpi"><div class="label">Usuários</div><div class="valor" th:text="${totalUsuarios}"></div></div>
+    </div>
+    <div class="acoes">
+        <a class="btn" th:href="@{/produtos}">📦 Gerenciar produtos</a>
+        <a class="btn" th:href="@{/produtos/novo}">➕ Novo produto</a>
+        <a class="btn btn-sec" th:href="@{/admin/usuarios}">👥 Usuários e perfis</a>
+    </div>
+</main>
+</body>
+</html>

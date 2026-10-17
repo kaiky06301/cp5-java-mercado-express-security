@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Cadastro')}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<main>
+    <div class="card auth">
+        <h2>📝 Criar conta</h2>
+        <div th:if="${param.semConta}" class="alert info">Não encontramos uma conta com este e-mail. Faça seu cadastro para continuar.</div>
+        <div th:replace="~{fragments :: alertas}"></div>
+        <form th:action="@{/cadastro}" method="post">
+            <label>Nome <input name="nome" placeholder="Seu nome completo" required></label>
+            <label>E-mail <input type="email" name="email" th:value="${email != null ? email : param.email}" placeholder="seu@email.com" required></label>
+            <label>Senha <input type="password" name="senha" minlength="6" placeholder="mínimo 6 caracteres" required></label>
+            <label>Confirmar senha <input type="password" name="confirmacao" minlength="6" required></label>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p style="font-size:.9rem">Já tem conta? <a th:href="@{/login}">Entrar</a></p>
+    </div>
+</main>
+</body>
+</html>

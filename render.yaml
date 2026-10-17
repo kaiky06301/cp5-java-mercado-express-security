@@ -1,0 +1,20 @@
+# Blueprint do Render (plano free): web service Docker + PostgreSQL
+services:
+  - type: web
+    name: mercado-express-security
+    runtime: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: DB_URL
+        sync: false   # jdbc:postgresql://<host>:5432/<database>
+      - key: DB_USER
+        fromDatabase: { name: mercado-express-db, property: user }
+      - key: DB_PASSWORD
+        fromDatabase: { name: mercado-express-db, property: password }
+
+databases:
+  - name: mercado-express-db
+    plan: free
+    databaseName: mercado
+    user: mercado

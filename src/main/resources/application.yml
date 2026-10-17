@@ -1,0 +1,16 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: mercado-express-security
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/mercado_sec}
+    username: ${DB_USER:mercado}
+    password: ${DB_PASSWORD:mercado123}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  thymeleaf:
+    cache: false

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments :: head('Produto')}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<main>
+    <div class="card" style="max-width:560px">
+        <span class="badge CLIENTE" th:text="${produto.categoria}"></span>
+        <h2 th:text="${produto.nome}"></h2>
+        <p th:text="${produto.descricao}"></p>
+        <p class="preco" th:text="${'R$ ' + #numbers.formatDecimal(produto.preco, 1, 'POINT', 2, 'COMMA')}"></p>
+        <p>Estoque disponível: <b th:text="${produto.estoque}"></b></p>
+        <div class="acoes">
+            <a class="btn btn-sec" th:href="@{/produtos}">Voltar</a>
+            <a sec:authorize="hasRole('ADMIN')" class="btn" th:href="@{/produtos/{id}/editar(id=${produto.id})}">Editar</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

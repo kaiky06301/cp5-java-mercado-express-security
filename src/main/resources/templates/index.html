@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments :: head('Início')}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<main>
+    <section class="hero">
+        <h2>Seu mercado rápido, perto de você</h2>
+        <p>Hortifruti, limpeza, mercearia e mais. Consulte o catálogo do <b>Mercado Express</b>, com preços e estoque em tempo real, direto do nosso banco de dados.</p>
+        <div sec:authorize="isAnonymous()">
+            <a class="btn" th:href="@{/login}">Entrar</a>
+            <a class="btn" th:href="@{/cadastro}">Criar conta</a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <a class="btn" th:href="@{/produtos}">Ver produtos</a>
+            <a class="btn" sec:authorize="hasRole('ADMIN')" th:href="@{/admin}">Painel administrativo</a>
+        </div>
+    </section>
+    <div class="grid">
+        <div class="card"><h3>🍌 Hortifruti</h3><p>Frutas e verduras frescas todos os dias.</p></div>
+        <div class="card"><h3>🧴 Limpeza</h3><p>Tudo para deixar sua casa brilhando.</p></div>
+        <div class="card"><h3>🥛 Mercearia</h3><p>O básico do dia a dia sem fila.</p></div>
+        <div class="card"><h3>🔐 Acesso seguro</h3><p>Login com Spring Security e dois perfis: <b>ADMIN</b> (gerente) e <b>CLIENTE</b>.</p></div>
+    </div>
+</main>
+</body>
+</html>

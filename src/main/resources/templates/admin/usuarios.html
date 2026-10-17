@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Usuários')}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<main>
+    <h2>👥 Usuários (TDS_Users_Mercado)</h2>
+    <div th:replace="~{fragments :: alertas}"></div>
+    <div class="tabela-wrap">
+    <table>
+        <tr><th>ID</th><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Cadastro</th><th></th></tr>
+        <tr th:each="u : ${usuarios}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.nome}"></td>
+            <td th:text="${u.email}"></td>
+            <td><span class="badge" th:classappend="${u.role.name()}" th:text="${u.role}"></span></td>
+            <td th:text="${u.dataCadastro != null ? #temporals.format(u.dataCadastro, 'dd/MM/yyyy HH:mm') : '-'}"></td>
+            <td>
+                <form th:action="@{/admin/usuarios/{id}/perfil(id=${u.id})}" method="post">
+                    <button class="btn-sec" type="submit" th:text="${u.role.name() == 'ADMIN'} ? 'Tornar CLIENTE' : 'Tornar ADMIN'"></button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(titulo)">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titulo} + ' | Mercado Express'">Mercado Express</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header th:fragment="header">
+    <h1><a th:href="@{/}" style="color:#fff;text-decoration:none">🛒 Mercado Express</a></h1>
+    <nav style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">
+        <a th:href="@{/}">Início</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/produtos}">Produtos</a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin}">Painel Admin</a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/usuarios}">Usuários</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/login}">Entrar</a>
+        <a sec:authorize="isAnonymous()" th:href="@{/cadastro}">Cadastre-se</a>
+        <span sec:authorize="isAuthenticated()" class="user-chip" style="margin-left:14px">
+            👤 <span sec:authentication="name"></span>
+            (<span sec:authorize="hasRole('ADMIN')">ADMIN</span><span sec:authorize="hasRole('CLIENTE')">CLIENTE</span>)
+        </span>
+        <form sec:authorize="isAuthenticated()" class="logout" th:action="@{/logout}" method="post">
+            <button type="submit">Sair</button>
+        </form>
+    </nav>
+</header>
+<div th:fragment="alertas">
+    <div th:if="${sucesso}" class="alert ok" th:text="${sucesso}"></div>
+    <div th:if="${erro}" class="alert erro" th:text="${erro}"></div>
+</div>
+</body>
+</html>
