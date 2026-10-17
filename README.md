@@ -322,14 +322,10 @@ No IntelliJ: abrir a pasta do projeto e executar `MercadoExpressSecurityApplicat
 
 ## ☁️ Deploy no Render
 
-1. O projeto tem um [`Dockerfile`](Dockerfile) multi-stage (build Maven, depois runtime JRE 21).
-2. No Render foi criado um **PostgreSQL** (plano free) e um **Web Service** do tipo *Docker* ligado a este repositório.
-3. Variáveis de ambiente do Web Service:
+O deploy usa **Render Blueprint** ([`render.yaml`](render.yaml)) com um [`Dockerfile`](Dockerfile) multi-stage (build Maven, depois runtime JRE 21):
 
-| Variável | Exemplo |
-|---|---|
-| `DB_URL` | `jdbc:postgresql://<host-interno>:5432/mercado` |
-| `DB_USER` | usuário do banco do Render |
-| `DB_PASSWORD` | senha do banco do Render |
-
-O Render define a variável `PORT` sozinho, e a aplicação usa `server.port: ${PORT:8080}`. Cada `git push` na branch `main` gera um novo deploy automático.
+1. No Render: **New + → Blueprint →** selecionar este repositório **→ Apply**.
+2. O Render cria sozinho o **PostgreSQL** (`mercado-express-db`, plano free) e o **Web Service Docker** (`mercado-express-security`, plano free).
+3. As variáveis `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` e `DB_PASSWORD` são injetadas a partir do banco criado. O container monta a URL JDBC (`DB_URL`) na inicialização.
+4. O Render define a variável `PORT`, e a aplicação usa `server.port: ${PORT:8080}`.
+5. Cada `git push` na branch `main` gera um novo deploy automático.
